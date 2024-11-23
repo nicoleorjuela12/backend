@@ -45,7 +45,7 @@ try {
 }
 
 // Servidor escuchando en el puerto definido en el archivo .env
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Servidor funcionando en http://localhost:${PORT}/`);
 });

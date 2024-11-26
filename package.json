@@ -6,8 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo 'No build step needed for backend'",
-    "start": "node App.js",
-    "dev": "nodemon App.js"
+    "start": "node ./bin/www",
+    "dev": "node --watch --trace-warnings --env-file .env ./bin/www",
+    "postinstall": "npm install --omit=dev"
   },
   "keywords": [],
   "author": "",

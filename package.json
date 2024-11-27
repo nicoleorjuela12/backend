@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "echo 'No build step needed for backend'",
     "start": "node App.js",
-    "postinstall": "npm install --omit=dev"
+    "dev": "nodemon App.js"
   },
   "keywords": [],
   "author": "",
@@ -24,7 +24,6 @@
     "express": "^4.21.1",
     "express-session": "^1.18.1",
     "jsonwebtoken": "^9.0.2",
-    "jws": "^x.x.x",
     "mysql": "^2.18.1",
     "mysql2": "^3.11.3",
     "node": "file:",

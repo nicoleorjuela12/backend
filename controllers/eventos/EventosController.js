@@ -1,66 +1,132 @@
-import EventosCliente from '../../models/eventos/eventos.js'
+import EventosCliente from '../../models/eventos/eventos.js';
+import InscripcionEvento from "../../models/eventos/InscripcionEventos.js"; // Modelo de InscripcionEvento
 
-
-// Mostrar todas las eventos
+// Mostrar todos los eventos
 export const getAllEventos = async (req, res) => {
   try {
-    const eventos = await EventosCliente.findAll();
-    res.json(eventos);
+    const evento = await EventosCliente.findAll(); // Obtén todas las evento sin ningún filtro
+    res.json(evento);
   } catch (error) {
-    res.json({ message: error.message });
+    console.error('Error al obtener eventos:', error);
+    res.status(500).json({ message: error.message });
   }
 };
 
-// Mostrar una evento por ID
+// Mostrar un evento por ID
 export const getEventos = async (req, res) => {
   try {
     const evento = await EventosCliente.findByPk(req.params.id_evento);
     res.json(evento);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-// Crear una nueva reserva
+// Crear un nuevo evento
 export const createEventos = async (req, res) => {
   try {
-    // Imprimir el cuerpo de la solicitud para ver qué datos se están recibiendo
     console.log("Datos recibidos:", req.body);
 
     const nuevoEvento = await EventosCliente.create(req.body);
-
-    // Imprimir la nueva reserva creada para verificar que se haya guardado correctamente
     console.log("Evento creado:", nuevoEvento);
 
-    res.json({ message: "Evento creada correctamente", evento: nuevoEvento });
+    res.json({ message: "Evento creado correctamente", evento: nuevoEvento });
   } catch (error) {
-    // Imprimir el error para obtener más detalles si ocurre un problema
-    console.error("Error al crear ReservaLocal:", error.message);
-    res.json({ message: error.message });
+    console.error("Error al crear un Evento:", error.message);
+    res.status(500).json({ message: error.message });
   }
 };
 
-
-// Actualizar una reserva existente
+// Actualizar un evento existente
 export const updateEvento = async (req, res) => {
   try {
     await EventosCliente.update(req.body, {
       where: { id_evento: req.params.id_evento }
     });
-    res.json({ message: "Evento actualizada correctamente" });
+    res.json({ message: "Evento actualizado correctamente" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
-// Eliminar una reserva
+// Eliminar un evento
 export const deleteEvento = async (req, res) => {
   try {
     await EventosCliente.destroy({
       where: { id_evento: req.params.id_evento }
     });
-    res.json({ message: "Evento eliminada correctamente" });
+    res.json({ message: "Evento eliminado correctamente" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
+};
+
+
+
+
+
+export const crearInscripcion = async (req, res) => {
+    const {
+        id_evento,
+        id_usuario,
+        nombre,
+        numero_documento,
+        telefono,
+        correo,
+        metodo_pago,
+        total
+    } = req.body;
+
+    try {
+        // Verificar si ya existe una inscripción para este usuario y evento
+        const inscripcionExistente = await InscripcionEvento.findOne({
+            where: { id_evento, id_usuario },
+        });
+
+        if (inscripcionExistente) {
+            return res.status(400).json({ message: "El usuario ya está inscrito en este evento" });
+        }
+
+        // Obtener el evento para verificar la capacidad disponible
+        const evento = await EventosCliente.findOne({ where: { id_evento } });
+
+        if (!evento) {
+            return res.status(404).json({ message: "Evento no encontrado" });
+        }
+
+        // Verificar si hay cupos disponibles
+        if (evento.capacidad <= 0) {
+            return res.status(400).json({ message: "No hay cupos disponibles para este evento" });
+        }
+
+        // Crear la inscripción en la tabla InscripcionEvento
+        const nuevaInscripcion = await InscripcionEvento.create({
+            id_evento,
+            id_usuario,
+            nombre,
+            numero_documento,
+            telefono,
+            correo,
+            metodo_pago,
+            total,
+            fecha_inscripcion: new Date(),
+            estado_inscripcion: "Pendiente"
+        });
+
+        // Decrementar la capacidad del evento en la tabla Evento
+        evento.capacidad -= 1;  // Disminuir en 1 el número de cupos
+        await evento.save();    // Guardar la actualización de la capacidad
+
+        // Confirmación de éxito
+        res.status(201).json({ message: "Inscripción creada correctamente", inscripcion: nuevaInscripcion });
+    } catch (error) {
+        console.error("Error al crear una inscripción:", error);
+
+        // Manejo de errores con detalles
+        if (error.name === 'SequelizeDatabaseError') {
+            return res.status(500).json({ message: "Error de base de datos: " + error.message });
+        }
+
+        res.status(500).json({ message: "Error al procesar la inscripción", error: error.message });
+    }
 };

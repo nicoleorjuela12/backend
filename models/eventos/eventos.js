@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../../database/db.js';
 
-const EventosCliente = db.define('Evento', {
+const EventosCliente = db.define('evento', {
     id_evento: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -13,6 +13,10 @@ const EventosCliente = db.define('Evento', {
     },
     descripcion: {
       type: DataTypes.STRING,
+      allowNull:false,
+    },
+    categoria: {
+      type: DataTypes.ENUM('charlas','Teatro','Deportes','Culturales','Infantiles'),
       allowNull:false,
     },
     horainicio: {
@@ -40,23 +44,19 @@ const EventosCliente = db.define('Evento', {
       allowNull:false,
     },
     imagenevento: {
-      type: DataTypes.BLOB('medium'),
-      allowNull:false,
-    },
-    metodo_pago: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.TEXT,
       allowNull:false,
     },
     fecha_limite_inscripcion: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.DATE,
       allowNull:false,
     },
     estado: {
-      type: DataTypes.ENUM('Proximo', 'Abierto', 'Cerrado'),
-      allowNull:false,
-    }
+      type: DataTypes.ENUM('Pendiente', 'Confirmado', 'Cancelado'),
+      allowNull: false,
+    },
     }, {
-        tableName: 'Evento', 
+        tableName: 'evento', 
         timestamps: false
         }
 );

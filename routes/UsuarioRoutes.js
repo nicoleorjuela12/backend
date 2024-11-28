@@ -72,6 +72,21 @@ usuarioRou.post('/pedidos', consultarPedidos);
 usuarioRou.put('/pedido', actualizarEstadoPedido);
 
 
+//eventos 
+usuarioRou.get('/evento', getAllEventos);
+usuarioRou.get('/evento/:id_evento', getEventos);
+usuarioRou.post('/evento', createEventos);
+usuarioRou.put('/evento/:id_evento', updateEvento);
+usuarioRou.delete('/evento/:id_evento', deleteEvento);
+
+
+//eventos  inscripcion 
+usuarioRou.get('/InscripcionEvento', getAllInscripciones);
+usuarioRou.get('/InscripcionEvento/:id_usuario', getInscripcion);
+usuarioRou.post('/InscripcionEvento', crearInscripcion);
+usuarioRou.put('/InscripcionEvento/:id_usuario', updateInscripcion);
+usuarioRou.delete('/InscripcionEvento/:id_usuario', deleteInscripcion);
+
 
 
 

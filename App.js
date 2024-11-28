@@ -44,11 +44,6 @@ try {
     console.log(`El error de conexión es: ${error}`);
 }
 
-// Servidor escuchando en el puerto definido en el archivo .env
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Servidor funcionando en http://localhost:${PORT}/`);
-});
 
 // Definir las relaciones entre modelos
 Aparecer.belongsTo(Pedido, { foreignKey: 'id_pedido' });

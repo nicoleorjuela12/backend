@@ -6,7 +6,7 @@ import usuarioRou from "./routes/UsuarioRoutes.js";
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv'; // Importar dotenv
 import Redis from 'redis'; // Importar Redis
-import connectRedis from 'connect-redis'; // Importar connect-redis
+import * as connectRedis from 'connect-redis'; // Importación correcta
 
 // Cargar las variables de entorno
 dotenv.config();
@@ -19,11 +19,11 @@ import Producto from "./models/producto/Producto.js";
 const app = express();
 
 // Crear un cliente Redis
-const RedisStore = connectRedis(session);
+const RedisStore = connectRedis.default(session); // Usar el 'default' export de connect-redis con express-session
 const redisClient = Redis.createClient({
     host: process.env.REDIS_HOST || 'localhost', // Configura tu host de Redis
     port: process.env.REDIS_PORT || 6379, // Configura el puerto de Redis
-    password: process.env.REDIS_PASSWORD || '', // Si tu Redis tiene contraseña, configúralo aquí
+    password: process.env.REDIS_PASSWORD || 'hol12345', // Si tu Redis tiene contraseña, configúralo aquí
 });
 
 // Configurar CORS para permitir solo solicitudes desde el origen especificado

@@ -49,3 +49,6 @@ try {
 Aparecer.belongsTo(Pedido, { foreignKey: 'id_pedido' });
 Pedido.hasMany(Aparecer, { foreignKey: 'id_pedido' });
 Producto.hasMany(Aparecer, { foreignKey: 'id_producto' });
+
+
+export default app;

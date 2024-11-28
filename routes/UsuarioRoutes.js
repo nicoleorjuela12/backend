@@ -4,6 +4,8 @@ import {getAllReservas,getReserva,createReserva,updateReserva,deleteReserva} fro
 import {getAllReservaLocal,getReservaLocal,createReservaLocal,updateReservaLocal,deleteReservaLocal} from "../controllers/reservas/ReservaLocal.js"
 import {verificarEmpleado,registrarEmpleado,ConsultarEmpleados,eliminarEmpleado } from "../controllers/user/EmpleadosControlador.js"
 import { registrarPedido,ConsultarPedidoId,actualizarEstadoPedido, consultarPedidos } from "../controllers/Pedidos/pedidos_controlador.js";
+import { createInscripcion, deleteInscripcion, getAllInscripciones, getInscripcion, updateInscripcion } from "../controllers/eventos/InscripcionController.js";
+import { getAllEventos, getEventos, createEventos, updateEvento, deleteEvento, crearInscripcion } from "../controllers/eventos/EventosController.js";
 import express from 'express';
 import bodyParser from 'body-parser';
 
@@ -83,7 +85,7 @@ usuarioRou.delete('/evento/:id_evento', deleteEvento);
 //eventos  inscripcion 
 usuarioRou.get('/InscripcionEvento', getAllInscripciones);
 usuarioRou.get('/InscripcionEvento/:id_usuario', getInscripcion);
-usuarioRou.post('/InscripcionEvento', crearInscripcion);
+usuarioRou.post('/InscripcionEvento', createInscripcion);
 usuarioRou.put('/InscripcionEvento/:id_usuario', updateInscripcion);
 usuarioRou.delete('/InscripcionEvento/:id_usuario', deleteInscripcion);
 

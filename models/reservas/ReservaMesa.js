@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../../database/db.js';
 
-const ReservaMesa = db.define('Reserva', {
+const ReservaMesa = db.define('ReservaMesa', {
   id_reserva: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -24,7 +24,7 @@ const ReservaMesa = db.define('Reserva', {
     allowNull: false,
   },
   decoracion: {
-    type: DataTypes.ENUM('Fecha especial', 'Aniversario', 'Cumpleanios', 'Otro'),
+    type: DataTypes.ENUM('Fecha especial', 'Aniversario', 'Cumpleaños', 'Otro'),
     allowNull: true,
   },
   comentarios: {

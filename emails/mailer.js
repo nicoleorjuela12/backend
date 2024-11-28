@@ -4,9 +4,9 @@ import mysql from 'mysql2/promise';
 
 // Configuración de la base de datos
 const dbConfig = {
-    host: 'localhost',
-    user: 'root',
-    database: 'proyecto_Mila',
+    host: process.env.DB_HOST,        
+    user: process.env.DB_USER,         
+    database: process.env.DB_NAME,    
 };
 
 // Función para obtener el nombre del empleado desde la base de datos

@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import db from '../../database/db.js';
 
-const EventosCliente = db.define('evento', {
+const EventosCliente = db.define('Evento', {
     id_evento: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -56,7 +56,7 @@ const EventosCliente = db.define('evento', {
       allowNull: false,
     },
     }, {
-        tableName: 'evento', 
+        tableName: 'Evento', 
         timestamps: false
         }
 );

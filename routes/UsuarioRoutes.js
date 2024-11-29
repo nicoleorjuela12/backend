@@ -50,10 +50,10 @@ usuarioRou.delete('/productos/:id_producto', eliminarProducto);
 //reservas 
 
 usuarioRou.get('/reservas', getAllReservas);
-usuarioRou.get('/reservas/:id_reserva', getReserva);
+usuarioRou.get('/reservas/:id_reservaMesa', getReserva);
 usuarioRou.post('/reservass', createReserva);
 usuarioRou.put('/reservas/:id_reserva', updateReserva);
-usuarioRou.delete('/reservas/:id_reserva', deleteReserva);
+usuarioRou.delete('/reservas/:id_reservaMesa', deleteReserva);
 
 
 

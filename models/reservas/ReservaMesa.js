@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import db from '../../database/db.js';
 
 const ReservaMesa = db.define('ReservaMesa', {
-  id_reserva: {
+  id_reservaMesa: {
     type: DataTypes.INTEGER,
     primaryKey: true,
     autoIncrement: true,

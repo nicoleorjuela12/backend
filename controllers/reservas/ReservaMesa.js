@@ -14,7 +14,7 @@ export const getAllReservas = async (req, res) => {
 // Mostrar una reserva por ID
 export const getReserva = async (req, res) => {
   try {
-    const reserva = await ReservaMesa.findByPk(req.params.id_reserva);
+    const reserva = await ReservaMesa.findByPk(req.params.id_reservaMesa);
     res.json(reserva);
   } catch (error) {
     res.json({ message: error.message });
@@ -45,7 +45,7 @@ export const createReserva = async (req, res) => {
 export const updateReserva = async (req, res) => {
   try {
     await ReservaMesa.update(req.body, {
-      where: { id_reserva: req.params.id_reserva }
+      where: { id_reservaMesa: req.params.id_reservaMesa }
     });
     res.json({ message: "ReservaMesa actualizada correctamente" });
   } catch (error) {
@@ -57,7 +57,7 @@ export const updateReserva = async (req, res) => {
 export const deleteReserva = async (req, res) => {
   try {
     await ReservaMesa.destroy({
-      where: { id_reserva: req.params.id_reserva }
+      where: { id_reservaMesa: req.params.id_reservaMesa }
     });
     res.json({ message: "ReservaMesa eliminada correctamente" });
   } catch (error) {

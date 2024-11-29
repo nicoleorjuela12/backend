@@ -4,8 +4,14 @@ import InscripcionEvento from "../../models/eventos/InscripcionEventos.js"; // M
 // Mostrar todos los eventos
 export const getAllEventos = async (req, res) => {
   try {
-    const evento = await EventosCliente.findAll(); // Obtén todas las evento sin ningún filtro
-    res.json(evento);
+    // Obtén solo los eventos con el estado "Confirmado"
+    const eventosConfirmados = await EventosCliente.findAll({
+      where: {
+        estado: 'Confirmado', // Filtra por el campo "estado"
+      },
+    });
+
+    res.json(eventosConfirmados); // Devuelve los eventos filtrados
   } catch (error) {
     console.error('Error al obtener eventos:', error);
     res.status(500).json({ message: error.message });

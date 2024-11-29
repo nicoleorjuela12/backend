@@ -51,7 +51,7 @@ usuarioRou.delete('/productos/:id_producto', eliminarProducto);
 
 usuarioRou.get('/reservas', getAllReservas);
 usuarioRou.get('/reservas/:id_reserva', getReserva);
-usuarioRou.post('/reservas', createReserva);
+usuarioRou.post('/reservass', createReserva);
 usuarioRou.put('/reservas/:id_reserva', updateReserva);
 usuarioRou.delete('/reservas/:id_reserva', deleteReserva);
 

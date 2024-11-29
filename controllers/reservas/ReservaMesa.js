@@ -21,12 +21,22 @@ export const getReserva = async (req, res) => {
   }
 };
 
-// Crear una nueva reserva
 export const createReserva = async (req, res) => {
   try {
+    // Imprimir el cuerpo de la solicitud para depurar los datos recibidos
+    console.log("Datos recibidos para ReservaMesa:", req.body);
+
+    // Crear la nueva reserva en la base de datos
     const nuevaReserva = await ReservaMesa.create(req.body);
+
+    // Imprimir la reserva creada para confirmar que fue guardada correctamente
+    console.log("ReservaMesa creada:", nuevaReserva);
+
+    // Enviar una respuesta exitosa al cliente
     res.json({ message: "ReservaMesa creada correctamente", reserva: nuevaReserva });
   } catch (error) {
+    // Manejo de errores y registro del mismo
+    console.error("Error al crear ReservaMesa:", error.message);
     res.json({ message: error.message });
   }
 };

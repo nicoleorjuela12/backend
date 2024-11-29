@@ -31,10 +31,6 @@ const ReservaMesa = db.define('ReservaMesa', {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  actividades: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
   tipo_servicios: {
     type: DataTypes.ENUM('Pintura de Escultura', 'Parques', 'Dibujo con colores'),
     allowNull: false,
